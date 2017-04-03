@@ -1,10 +1,11 @@
+<script src="https://js.stripe.com/v3/"></script>
 <%= bootstrap_devise_error_messages! %>
 <div class="panel panel-default devise-bs">
   <div class="panel-heading">
     <h4><%= t('.sign_up', default: 'Sign up') %></h4>
   </div>
   <div class="panel-body">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { role: 'form' }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { role: 'form', id: "payment-form" }) do |f| %>
       <div class="form-group">
         <%= f.label :email %>
         <%= f.email_field :email, autofocus: true, class: 'form-control' %>
@@ -17,7 +18,12 @@
         <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, class: 'form-control' %>
       </div>
-      <%= f.submit t('.sign_up', default: 'Sign up'), class: 'btn btn-primary' %>
+      <div class="form-group" >
+        <label for="card-element">Credit or debit card</label>
+        <div id="card-element"></div>
+        <div id="card-errors"></div>
+      </div>
+      <%= f.submit t('.sign_up', default: 'Sign up'), class: 'btn btn-primary', id: 'submit-button' %>
     <% end %>
   </div>
 </div>
