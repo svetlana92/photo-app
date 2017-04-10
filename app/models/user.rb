@@ -5,4 +5,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_one :payment
   accepts_nested_attributes_for :payment
+
+  protected
+
+  def after_confirmation
+    Stripe::Charge.create customer: self.stripe_customer_id,
+                          amount: 1000,
+                          description: 'Premium',
+                          currency: 'USD'
+  end
+
 end

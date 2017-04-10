@@ -1,21 +1,10 @@
 class Payment < ApplicationRecord
-  attr_accessor :card_number, :card_cvv, :card_expires_month, :card_expires_year
 
   belongs_to :user
 
-  def self.month_options
-    Date::MONTHNAMES.compact.each_with_index.map{ |name, i| ["#{i+1} - #{name}", i+1] }
-  end
+  # def process_payment
+  #   token = params[:stripeToken]
+  #   customer = Stripe::Customer.create email: email, source: token
+  # end
 
-  def self.year_options
-    (Date.today.year..(Date.today.year+20)).to_a
-  end
-
-  def process_payment
-    customer = Stripe::Customer.create email: email, card: token
-    Stripe::Charge.create customer: customer.id,
-                          amount: 1000,
-                          description: 'Premium',
-                          currency: 'USD'
-  end
 end

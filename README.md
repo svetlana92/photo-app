@@ -1,24 +1,8 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Stripe.api_key = "sk_test_n2C0wUVHy5nvvNNXyMD3wwB6"
+token = "tok_1A5spwJn8d1iXQJmjGX5w1WG"
+charge = Stripe::Charge.create(
+  :amount => 1000,
+  :currency => "usd",
+  :description => "Example charge",
+  :source => token,
+)
